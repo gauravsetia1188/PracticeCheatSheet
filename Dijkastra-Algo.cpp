@@ -7,21 +7,21 @@ int computeShortest(vector<vector<int>>& arr, int n, int src) {
 	pq.push(make_pair(0, src)); // {distance, node}
 	dist[src] = 0;
 
-	ector<vector<Pair>> graph(n+1); // create graph
+	unordered_map<int,vector<pair<int, int>>> graph;
 	for (int i = 0; i < arr.size(); i++)
 		graph[arr[i][0]].push_back(make_pair(arr[i][1], arr[i][2]));    //  node : {node1, dist}
 
 	while (!pq.empty()) {
-		pair<int, int>p = pq.top();
+		pair<int, int>top = pq.top();
 		pq.pop();
 
-		int u = p.second;
-		for(auto node : edges[current]) {
+		int current = top.second;
+		for(auto node : graph[current]) {
 			int v = node.first;
 			int w = node.second;
 
-			if (dist[v] > dist[u] + w) {
-				dist[v] = dist[u] + w;
+			if (dist[v] > dist[current] + w) {
+				dist[v] = dist[current] + w;
 				pq.push(make_pair(dist[v], v));
 			}
 		}
