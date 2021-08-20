@@ -16,7 +16,7 @@ int computeShortest(vector<vector<int>>& arr, int n, int src) {
 		pq.pop();
 
 		int u = p.second;
-		for (auto it = hm[u].begin(); it != hm[u].end(); it++) {
+		for (auto it = graph[u].begin(); it != graph[u].end(); it++) {
 			int v = it->first;
 			int w = it->second;
 
