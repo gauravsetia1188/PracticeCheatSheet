@@ -1,5 +1,6 @@
 // check whether you can reach back the starting node, covering all the edges.
 // Graph is Semi-Eulerian means - covered all the edges, coming back to the starting node is not necessary
+// For directed Eulerian: https://www.techiedelight.com/eulerian-path-directed-graph/
 #include<bits/stdc++.h>
 using namespace std;
 #define V 5
