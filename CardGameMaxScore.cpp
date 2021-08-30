@@ -15,7 +15,9 @@
 // You're only allowed to pick cards from the left side of the deck
 // Both players have to play optimally.
 // Return the maximum sum of cards Player 1 can obtain by playing optimally.
-    
+
+
+// O(n) and O(n)    
 public static int find(int[] cards) {
     if (cards == null || cards.length == 0) {
         return 0;
@@ -36,3 +38,29 @@ public static int find(int[] cards) {
     }
     return dp[0];
 }
+
+
+// O(n) and O(1)
+
+//Call your score x, opponent's score y. At the end of the minimax algorithm, you have maximized x-y. Notice the sum of the entire array is x+y. Final line is (x-y+x+y)/2 = x.
+//Very clever, most other solutions here return x-y, not x as the problem statement asks for
+
+private int getMaxHeap(int[] nums){
+        int sum = 0, n = nums.length;
+        for(int num: nums){
+            sum += num;
+        }
+        int[] dp = new int[4];
+        for(int i = n - 1; i >= 0 ; i--){
+            int cnt = 0, max = Integer.MIN_VALUE;
+            for(int j = i, len = 0; j < n && len < 3; j++, len++){
+                cnt += nums[j];
+                max = Math.max(max, cnt - dp[len]);
+            }
+            for(int j = 3; j > 0; j--){
+                dp[j] = dp[j-1];
+            }
+            dp[0] = max;
+        }
+        return (dp[0] + sum) / 2;
+    }
